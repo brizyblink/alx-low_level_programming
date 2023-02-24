@@ -1,27 +1,42 @@
-#include "main.h"
+#include <stdio.h>
+#include "variadic_functions.h"
+#include <stdarg.h>
 
 /**
- * print_number - prints an integer
- * @n: integer to be printed
- */
-void print_number(int n)
-{
-unsigned int n1;
+* print_numbers - Function that prints numbers.
+* @separator: The character to print between numbers.
+* @n: Zise.
+* Return: Nothing.
+*/
 
-if (n < 0)
+void print_numbers(const char *separator, const unsigned int n, ...)
 {
-n1 = -n;
-_putchar('-');
-}
-else
-{
-n1 = n;
+	va_list list;
+	unsigned int i;
+
+	va_start(list, n);
+
+	if (separator == NULL)
+	{
+		for (i = 0; i < n; i++)
+		{
+			printf("%d", va_arg(list, unsigned int));
+		}
+	}
+
+	if (separator != NULL)
+	{
+		for (i = 0; i < n; i++)
+		{
+			printf("%d", va_arg(list, unsigned int));
+
+			if (i != n - 1)
+			{
+				printf("%s", separator);
+			}
+		}
+	}
+	printf("\n");
+	va_end(list);
 }
 
-if (n1 / 10)
-{
-print_number(n1 / 10);
-}
-
-_putchar((n1 % 10) + '0');
-}

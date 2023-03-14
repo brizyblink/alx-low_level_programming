@@ -1,47 +1,42 @@
 #include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
-* str_concat - concatenates two strings.
-* @s1: The first string to print.
-* @s2: The second string to print.
-* Return: The sum of two strings.
-*/
+ * str_concat - function that concatenates two strings
+ * @s1: first string
+ * @s2: second string
+ * Return: Null if not successful
+ */
 
 char *str_concat(char *s1, char *s2)
 {
-	int a, b;
-	int i, j = 0;
-	char *p;
+	unsigned int night1 = 0, night2 = 0;
+	char *ptr, *burn;
 
-	if (s1 == NULL)
-	{
+	ptr = s1;
+
+	if (s1)
+		while (*ptr++)
+			night1++;
+	else
 		s1 = "";
-	}
-	if (s2 == NULL)
-	{
+	ptr = s2;
+	if (s2)
+		while (*ptr++)
+			night2++;
+
+	else
 		s2 = "";
-	}
-
-	for (a = 0; s1[a] || s2[a]; a++)
-	{
-		b++;
-	}
-
-	p = malloc(sizeof(char) * b);
-
-	if (p == NULL)
-	{
+	burn = malloc(night1 + night2 + 1);
+	if (!burn)
 		return (NULL);
-	}
+	ptr = burn;
+	while (*s1)
+		*ptr++ = *s1++;
+	while (*s2)
+		*ptr++ = *s2++;
+	*ptr = 0;
 
-	for (i = 0; s1[i]; i++)
-	{
-		p[j++] = s1[i];
-	}
-	for (i = 0; s2[i]; i++)
-	{
-		p[j++] = s2[i];
-	}
-	return (p);
+	return (burn);
 }

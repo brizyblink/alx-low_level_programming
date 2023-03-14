@@ -2,48 +2,53 @@
 #include <stdlib.h>
 
 /**
-* argstostr - concatenates all the arguments of your program.
-* @ac: The number of arguments.
-* @av: The array that store the arguments.
-* Return: A pointer to the new string.
-*/
+ * argstostr - concatenates all arguments of the program.
+ * @ac: argument count.
+ * @av: pointer to array of size ac.
+ * Return: NULL if ac == 0 or av == null, Pointer to new string.
+ */
 
 char *argstostr(int ac, char **av)
 {
-	int a, b, j, tam;
-	char *p;
+	int i, n, k = 0, night = 0;
+	char *str;
 
 	if (ac == 0 || av == NULL)
-	{
 		return (NULL);
-	}
 
-	for (a = 0; a < ac; a++)
+	for (i = 0; i < ac; i++)
 	{
-		for (b = 0; av[a][b]; b++)
-		{
-			tam++;
-		}
-		tam++;
+		for (n = 0; av[i][n]; n++)
+			night++;
 	}
+	night += ac;
 
-	p = malloc(sizeof(char) * tam + 1);
+	str = malloc(sizeof(char) * night + 1);
 
-	if (p == NULL)
-	{
+	if (str == NULL)
 		return (NULL);
-	}
 
-	j = 0;
+	for (i = 0; i < ac; i++)
 
-	for (a = 0; a < ac; a++)
 	{
-		for (b = 0; av[a][b]; b++)
+
+		for (n = 0; av[i][n]; n++)
+
 		{
-			p[j++] = av[a][b];
+
+			str[k] = av[i][n];
+
+			k++;
+
 		}
-		p[j++] = '\n';
+
+		if (str[k] == '\0')
+
+		{
+
+			str[k++] = '\n';
+		}
 	}
-	p[tam] = '\0';
-	return (p);
+	return (str);
 }
+
